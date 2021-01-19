@@ -197,10 +197,10 @@ def get_strikes_or_ball(user_input_number, random_number):
     user = user_input_number[:]
     ran = random_number[:]
 
-    for i in range(0, 3):
+    for i in range(0, len(user)):
         if user[i] == ran[i]:
             strike += 1
-        for j in range(0, 3):
+        for j in range(0, len(ran)):
             if user[i] == ran[j]:
                 ball += 1
     ball -= strike
@@ -299,7 +299,7 @@ def main():
             print("Wrong Input, Input again")
 
         # stop game
-        if user_input == 0:
+        if user_input == '0':
             break
 
         # get strike, ball
