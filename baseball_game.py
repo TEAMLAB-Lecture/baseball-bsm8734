@@ -316,6 +316,9 @@ def main():
                     cont_input = input("You win, one more(Y/N) ?")
                     if is_yes(cont_input) == True:
                         end_game = False
+                        # make random number
+                        random_number = str(get_not_duplicated_three_digit_number())
+                        print("Random Number is : ", random_number)
                         break
                     elif is_no(cont_input) == True:
                         end_game = True
@@ -326,10 +329,6 @@ def main():
             # stop game
             if end_game == True:
                 break
-
-            # make random number
-            random_number = str(get_not_duplicated_three_digit_number())
-            print("Random Number is : ", random_number)
 
         # stop game
         if end_game == True:
