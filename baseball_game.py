@@ -31,6 +31,7 @@ def is_digit(user_input_number):
     # '''
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
+
     result = True
     if user_input_number.isdigit() == False:
         return False
@@ -282,6 +283,7 @@ def is_no(one_more_input):
 def main():
     print("Play Baseball")
 
+    end_game = False
     while True:
         user_input = "999"
     
@@ -289,38 +291,52 @@ def main():
         random_number = str(get_not_duplicated_three_digit_number())
         print("Random Number is : ", random_number)
 
-        # get input
         while True:
-            user_input = input("Input guess number : ")
-            if user_input == '0':
+            # get input
+            while True:
+                user_input = input("Input guess number : ")
+                if user_input == '0':
+                    end_game = True
+                    break
+                if is_validated_number(user_input) == True:
+                    break
+                print("Wrong Input, Input again")
+            
+            # stop game
+            if end_game == True:
                 break
-            if is_validated_number(user_input) == True:
+
+            # get strike, ball
+            strike, ball = get_strikes_or_ball(user_input, random_number)
+            print("Strikes : " + str(strike) + " , Balls : " + str(ball))
+            
+
+            if strike == 3:
+                while True:
+                    cont_input = input("You win, one more(Y/N) ?")
+                    if is_yes(cont_input) == True:
+                        end_game = False
+                        break
+                    elif is_no(cont_input) == True:
+                        end_game = True
+                        break
+                    else:
+                        print("Wrong Input, Input again")
+
+            # stop game
+            if end_game == True:
                 break
-            print("Wrong Input, Input again")
+
+            # make random number
+            random_number = str(get_not_duplicated_three_digit_number())
+            print("Random Number is : ", random_number)
 
         # stop game
-        if user_input == '0':
+        if end_game == True:
             break
 
-        # get strike, ball
-        strike, ball = get_strikes_or_ball(user_input, random_number)
-        print("Strikes : " + str(strike) + " , Balls : " + str(ball))
+        
 
-        end_tf = False
-        if strike == 3:
-            while True:
-                cont_input = input("You win, one more(Y/N) ?")
-                if is_yes(cont_input) == True:
-                    end_tf = False
-                    break
-                elif is_no(cont_input) == True:
-                    end_tf = True
-                    break
-                else:
-                    print("Wrong Input, Input again")
-
-        if end_tf == True:
-            break
         # ==================================
         
     print("Thank you for using this program")
